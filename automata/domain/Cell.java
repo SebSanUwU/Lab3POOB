@@ -24,7 +24,7 @@ public class Cell extends Agent implements Item{
         this.row=row;
         this.column=column;
         nextState=Agent.ALIVE;
-        automata.setItem(row,column,(Item)this);	
+        automata.setItem(row,column,(Item)this);    
         color=Color.red;
     }
 
