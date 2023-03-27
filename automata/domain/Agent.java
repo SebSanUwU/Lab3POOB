@@ -13,7 +13,7 @@ public abstract class Agent{
      * 
      */
     public Agent(){
-        state=UNKNOWN;
+        state=DEAD;
         age=0;
     }
 
@@ -30,7 +30,11 @@ public abstract class Agent{
      */   
     public final int getAge(){
         return age;
-    }    
+    }
+    
+    public void resetAge(){
+        age=0;
+    }
 
     /**Returns if alive
     @return true, if ALIVE; false, otherwise

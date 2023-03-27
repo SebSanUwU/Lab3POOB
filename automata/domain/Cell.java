@@ -27,7 +27,7 @@ public class Cell extends Agent implements Item{
         automata.setItem(row,column,(Item)this);    
         color=Color.red;
     }
-
+    
     /**Returns the shape
     @return 
      */
@@ -48,8 +48,11 @@ public class Cell extends Agent implements Item{
     public final int getColumn(){
         return column;
     }
-
     
+    public CellularAutomata getAutomata(){
+        return automata;
+    }
+
     /**Returns the color
     @return 
      */
@@ -72,4 +75,23 @@ public class Cell extends Agent implements Item{
         turn();
         state=nextState;
     }
+    
+    public int contarVecinos(){
+        int cont = 0;
+        int lenght = automata.getLength();
+        //norte
+        if(automata.getItem((row+lenght-1)%lenght,(column+lenght)%lenght)!=null && automata.getItem((row+lenght-1)%lenght,(column+lenght)%lenght).isAlive()) cont++;
+        System.out.println(cont);
+        //sur
+        if(automata.getItem((row+lenght+1)%lenght,(column+lenght)%lenght)!=null && automata.getItem((row+lenght+1)%lenght,(column+lenght)%lenght).isAlive()) cont++;
+        System.out.println(cont);
+        //este
+        if(automata.getItem((row+lenght)%lenght,(column+lenght+1)%lenght)!=null && automata.getItem((row+lenght)%lenght,(column+lenght+1)%lenght).isAlive()) cont++;
+        System.out.println(cont);
+        //oeste
+        if(automata.getItem((row+lenght)%lenght,(column+lenght-1)%lenght)!=null && automata.getItem((row+lenght)%lenght,(column+lenght-1)%lenght).isAlive()) cont++;
+        System.out.println(cont);
+        return cont;
+    }
+    
 }
