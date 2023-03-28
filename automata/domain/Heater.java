@@ -39,6 +39,10 @@ public class Heater extends Agent implements Item
         }
     }
     
+    public final Color getColor(){
+        return color;
+    }
+    
     public void decide(){
         if(getAge()>=5 && state == Agent.DEAD){
             nextState=Agent.ALIVE;
@@ -52,5 +56,6 @@ public class Heater extends Agent implements Item
     public void change(){
         turn();
         state=nextState;
+        setColor();
     }
 }

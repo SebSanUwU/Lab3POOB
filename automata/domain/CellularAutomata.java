@@ -14,7 +14,6 @@ public class CellularAutomata{
                 automata[r][c]=null;
             }
         }
-        someItems();
     }
 
     public int  getLength(){
@@ -29,10 +28,6 @@ public class CellularAutomata{
         automata[r][c]=e;
     }
 
-    public void someItems(){
-        new Cell(this, 5, 5);
-    }
-    
     public void someItems(int r, int c){
         new Cell(this, r, c);
     }

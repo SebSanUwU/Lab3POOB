@@ -81,16 +81,16 @@ public class Cell extends Agent implements Item{
         int lenght = automata.getLength();
         //norte
         if(automata.getItem((row+lenght-1)%lenght,(column+lenght)%lenght)!=null && automata.getItem((row+lenght-1)%lenght,(column+lenght)%lenght).isAlive()) cont++;
-        System.out.println(cont);
+        //System.out.println(cont);
         //sur
         if(automata.getItem((row+lenght+1)%lenght,(column+lenght)%lenght)!=null && automata.getItem((row+lenght+1)%lenght,(column+lenght)%lenght).isAlive()) cont++;
-        System.out.println(cont);
+        //System.out.println(cont);
         //este
         if(automata.getItem((row+lenght)%lenght,(column+lenght+1)%lenght)!=null && automata.getItem((row+lenght)%lenght,(column+lenght+1)%lenght).isAlive()) cont++;
-        System.out.println(cont);
+        //System.out.println(cont);
         //oeste
         if(automata.getItem((row+lenght)%lenght,(column+lenght-1)%lenght)!=null && automata.getItem((row+lenght)%lenght,(column+lenght-1)%lenght).isAlive()) cont++;
-        System.out.println(cont);
+        //System.out.println(cont);
         return cont;
     }
     
