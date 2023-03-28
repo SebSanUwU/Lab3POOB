@@ -44,6 +44,10 @@ public class CellularAutomata{
         new Heater(this,r,c);
     }
     
+    public void someItemsConway(int r, int c){
+        new Conway(this,r,c);
+    }
+    
     public void ticTac(){
         Item[][] automataCopy = new Item[LENGTH][LENGTH];
         for (int r=0;r<LENGTH;r++){
@@ -58,10 +62,14 @@ public class CellularAutomata{
                     //System.out.println(r+","+c);
                     automataCopy[r][c].decide();
                     automataCopy[r][c].change();
+                }else{
+                    //Si en el vecindario, hay una celda vacia rodeada por 3 células vivas “nace” una nueva cédula
+                    if(automataCopy[r][c] == null && new Conway(this, r, c).vecinasVivas() == 3) someItemsConway(r,c);
                 }
             }
         }
     }
+    
     /**
      * Metodo que identifica los vecinos del item.
      * @param, row fila del item.
@@ -120,5 +128,4 @@ public class CellularAutomata{
         }
         return vecinos;
     }
-
 }

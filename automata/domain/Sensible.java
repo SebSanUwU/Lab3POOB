@@ -9,10 +9,7 @@ import java.awt.Color;
  */
 public class Sensible extends Cell
 {
-    // instance variables - replace the example below with your own
-    private int x;
     
-
     public Sensible(CellularAutomata ac,int row, int column){
         super(ac,row,column);
         color = Color.blue;
