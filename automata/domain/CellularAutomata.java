@@ -36,6 +36,10 @@ public class CellularAutomata{
         new Sociable(this, r, c);
     }
     
+    public void someSensibleItems(int r, int c){
+        new Sensible(this, r, c);
+    }
+    
     public void someItemsHeater(int r, int c){
         new Heater(this,r,c);
     }
@@ -51,12 +55,46 @@ public class CellularAutomata{
         for (int r=0;r<LENGTH;r++){
             for (int c=0;c<LENGTH;c++){
                 if(automataCopy[r][c] != null){
-                    System.out.println(r+","+c);
+                    //System.out.println(r+","+c);
                     automataCopy[r][c].decide();
                     automataCopy[r][c].change();
                 }
             }
         }
+    }
+    /**
+     * Metodo que identifica los vecinos del item.
+     * @param, row fila del item.
+     * @param column, columna del item
+     * @return arreglo de Item
+     */
+    public Item[] getVecinos(int row, int column){
+        Item[] vecinos = new Item[4];
+        //Se mira vecino al norte
+        try{
+            vecinos[0] = getItem(row - 1,column);
+        }catch(IndexOutOfBoundsException v){
+            vecinos[0] = null;
+        }
+        //Se mira vecino al sur
+        try{
+            vecinos[2] = getItem(row + 1,column);
+        }catch(IndexOutOfBoundsException v){
+            vecinos[2] = null;
+        }
+        //Se mira vecino al este
+        try{
+            vecinos[1] = getItem(row,column + 1);
+        }catch(IndexOutOfBoundsException v){
+            vecinos[1] = null;
+        }
+        //Se mira vecino al oeste
+        try{
+            vecinos[3] = getItem(row,column - 1);
+        }catch(IndexOutOfBoundsException v){
+            vecinos[3] = null;
+        }
+        return vecinos;
     }
 
 }
