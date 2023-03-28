@@ -31,11 +31,11 @@ public class Sensible extends Cell
             if(getAge()>=50){
                 nextState=Agent.DEAD;
             }
-            if(au.getVecinos(row,column)[2].isAlive()&& 
-            (au.getVecinos(row,column)[2] instanceof Sociable) 
+            if(au.getVecinos(row,column)[4].isAlive()&& 
+            (au.getItem(row + 1, column) instanceof Sociable) 
             && ((getAge() + 1)%5 == 0) &&
-            au.getItem(((Cell) au.getVecinos(row,column)[2]).getRow(),((Cell)au.getVecinos(row,column)[2]).getColumn() + 1) == null){
-                au.someItems(((Cell) au.getVecinos(row,column)[2]).getRow(),((Cell)au.getVecinos(row,column)[2]).getColumn() + 1);
+            au.getItem(row + 1,column + 1) == null){
+                au.someItems(row + 1, column + 1);
             }
         }
     }
@@ -43,7 +43,7 @@ public class Sensible extends Cell
     public int vecinosMuertos(){
         CellularAutomata au=this.getAutomata();
         int vecinosMuertos = 0;
-        for(int i = 0; i < 4;i++){
+        for(int i = 0; i < 8;i++){
             try{
                 if(!au.getVecinos(getRow(), getColumn())[i].isAlive() && au.getVecinos(getRow(), getColumn())[i] instanceof Cell) vecinosMuertos++;
             }catch(NullPointerException e){
