@@ -6,6 +6,7 @@ import java.util.*;
 public class CellularAutomata{
     static private int LENGTH=30;
     private Item[][] automata;
+    public Item[][] automataCopy;
     
     public CellularAutomata() {
         automata=new Item[LENGTH][LENGTH];
@@ -14,6 +15,7 @@ public class CellularAutomata{
                 automata[r][c]=null;
             }
         }
+        this.automataCopy=automataCopy();
     }
 
     public int  getLength(){
@@ -22,6 +24,10 @@ public class CellularAutomata{
 
     public Item getItem(int r,int c){
         return automata[r][c];
+    }
+    
+    public Item getItemCopy(int r,int c){
+        return automataCopy[r][c];
     }
 
     public void setItem(int r, int c, Item e){
@@ -54,6 +60,7 @@ public class CellularAutomata{
     
     public void ticTac(){
         Item[][] automataCopy = new Item[LENGTH][LENGTH];
+        this.newAutomataCopy();
         for (int r=0;r<LENGTH;r++){
             for (int c=0;c<LENGTH;c++){
                 automataCopy[r][c]=this.getItem(r,c);
@@ -63,17 +70,34 @@ public class CellularAutomata{
         for (int r=0;r<LENGTH;r++){
             for (int c=0;c<LENGTH;c++){
                 if(automataCopy[r][c] != null){
-                    System.out.println(r+","+c);
+                    
                     automataCopy[r][c].change();
-                    automataCopy[r][c].decide();
-                }else{
-                    Conway newCell = new Conway(this,r,c);
-                    if(newCell.contarTodosVecinos()<3){
-                        newCell.deleteItem();
-                    }
                 }
             }
         }
+    
+        for (int r=0;r<LENGTH;r++){
+            for (int c=0;c<LENGTH;c++){
+                if(automataCopy[r][c] != null){
+                    System.out.println(r+","+c);
+                    automataCopy[r][c].decide();
+                }
+            }
+        }
+        this.newAutomataCopy();
+    }
+    public Item[][] automataCopy(){
+        Item[][] automataCopy = new Item[LENGTH][LENGTH];
+        for (int r=0;r<LENGTH;r++){
+            for (int c=0;c<LENGTH;c++){
+                automataCopy[r][c]=this.getItem(r,c);
+            }
+        }
+        return automataCopy;
+    }
+    
+    public void newAutomataCopy(){
+        this.automataCopy=automataCopy();
     }
     
     /**
@@ -86,7 +110,7 @@ public class CellularAutomata{
         Item[] vecinos = new Item[4];
         //Se mira vecino al norte
         try{
-            if(getItem(row - 1,column) != null){
+            if(getItemCopy(row - 1,column) != null){
                 vecinos[0] = getItem(row - 1,column);
             }
         }catch(IndexOutOfBoundsException v){
@@ -94,7 +118,7 @@ public class CellularAutomata{
         }
         //Se mira vecino al este
         try{
-            if(getItem(row,column + 1) != null){
+            if(getItemCopy(row,column + 1) != null){
                 vecinos[1] = getItem(row,column + 1);
             }
         }catch(IndexOutOfBoundsException v){
@@ -102,7 +126,7 @@ public class CellularAutomata{
         }
         //Se mira vecino al sur
         try{
-            if(getItem(row + 1,column) != null){
+            if(getItemCopy(row + 1,column) != null){
                 vecinos[2] = getItem(row + 1,column);
             }
         }catch(IndexOutOfBoundsException v){
@@ -110,7 +134,7 @@ public class CellularAutomata{
         }
         //Se mira vecino al oeste
         try{
-            if(getItem(row,column - 1) != null){
+            if(getItemCopy(row,column - 1) != null){
                vecinos[3] = getItem(row,column - 1); 
             }
         }catch(IndexOutOfBoundsException v){
