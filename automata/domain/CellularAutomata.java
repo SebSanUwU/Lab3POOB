@@ -44,6 +44,10 @@ public class CellularAutomata{
         new Heater(this,r,c);
     }
     
+    public void someItemsLightBulb(int r, int c){
+        new LightBulb(this,r,c);
+    }
+    
     public void someItemsConway(int r, int c){
         new Conway(this,r,c);
     }
@@ -59,12 +63,14 @@ public class CellularAutomata{
         for (int r=0;r<LENGTH;r++){
             for (int c=0;c<LENGTH;c++){
                 if(automataCopy[r][c] != null){
-                    //System.out.println(r+","+c);
-                    automataCopy[r][c].decide();
+                    System.out.println(r+","+c);
                     automataCopy[r][c].change();
+                    automataCopy[r][c].decide();
                 }else{
-                    //Si en el vecindario, hay una celda vacia rodeada por 3 células vivas “nace” una nueva cédula
-                    if(automataCopy[r][c] == null && new Conway(this, r, c).vecinasVivas() == 3) someItemsConway(r,c);
+                    Conway newCell = new Conway(this,r,c);
+                    if(newCell.contarTodosVecinos()<3){
+                        newCell.deleteItem();
+                    }
                 }
             }
         }
@@ -77,54 +83,38 @@ public class CellularAutomata{
      * @return arreglo de Item
      */
     public Item[] getVecinos(int row, int column){
-        Item[] vecinos = new Item[8];
+        Item[] vecinos = new Item[4];
         //Se mira vecino al norte
         try{
-            vecinos[0] = getItem(row - 1,column);
+            if(getItem(row - 1,column) != null){
+                vecinos[0] = getItem(row - 1,column);
+            }
         }catch(IndexOutOfBoundsException v){
             vecinos[0] = null;
         }
-        //Se mira el vecino al noreste
+        //Se mira vecino al este
         try{
-            vecinos[1] = getItem(row-1,column + 1);
+            if(getItem(row,column + 1) != null){
+                vecinos[1] = getItem(row,column + 1);
+            }
         }catch(IndexOutOfBoundsException v){
             vecinos[1] = null;
         }
-        //Se mira vecino al este
+        //Se mira vecino al sur
         try{
-            vecinos[2] = getItem(row,column + 1);
+            if(getItem(row + 1,column) != null){
+                vecinos[2] = getItem(row + 1,column);
+            }
         }catch(IndexOutOfBoundsException v){
             vecinos[2] = null;
         }
-        //Se mira el vecino al sureste
-        try{
-            vecinos[3] = getItem(row+1,column + 1);
-        }catch(IndexOutOfBoundsException v){
-            vecinos[3] = null;
-        }
-        //Se mira vecino al sur
-        try{
-            vecinos[4] = getItem(row + 1,column);
-        }catch(IndexOutOfBoundsException v){
-            vecinos[4] = null;
-        }
-        //Se mira el vecino al suroeste
-        try{
-            vecinos[5] = getItem(row+1,column - 1);
-        }catch(IndexOutOfBoundsException v){
-            vecinos[5] = null;
-        }
         //Se mira vecino al oeste
         try{
-            vecinos[6] = getItem(row,column - 1);
+            if(getItem(row,column - 1) != null){
+               vecinos[3] = getItem(row,column - 1); 
+            }
         }catch(IndexOutOfBoundsException v){
-            vecinos[6] = null;
-        }
-        //Se mira el vecino al noroeste
-        try{
-            vecinos[7] = getItem(row-1,column - 1);
-        }catch(IndexOutOfBoundsException v){
-            vecinos[7] = null;
+            vecinos[3] = null;
         }
         return vecinos;
     }

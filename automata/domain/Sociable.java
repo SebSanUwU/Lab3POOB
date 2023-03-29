@@ -17,6 +17,7 @@ public class Sociable extends Cell
         CellularAutomata au=this.getAutomata();
         if(isAlive()){
             //System.out.println("Decidiendo");
+            contarTodosVecinos();
             if(contarVecinos() >= 2){
                 //System.out.println("muerte vecinos");
                 nextState=Agent.DEAD;
@@ -26,12 +27,12 @@ public class Sociable extends Cell
                 nextState=Agent.DEAD;
             }
             if(getColumn()+1<au.getLength()  
-            && getAge()%9==0 
+            && getAge()%10==0 
             && au.getItem((getRow()+au.getLength())%au.getLength(),(getColumn()+au.getLength()+1)%au.getLength())==null){
                 au.someItems(getRow(),getColumn()+1);
             }
             if(getColumn()-1>=0 
-            && getAge()%9==0 
+            && getAge()%10==0 
             && au.getItem((getRow()+au.getLength())%au.getLength(),(getColumn()+au.getLength()-1)%au.getLength())==null){
                 au.someItemsSocial(getRow(),getColumn()-1);
             }

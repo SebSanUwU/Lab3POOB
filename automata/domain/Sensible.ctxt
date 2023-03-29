@@ -5,6 +5,4 @@ comment1.params=ac\ row\ column
 comment1.target=Sensible(CellularAutomata,\ int,\ int)
 comment2.params=
 comment2.target=void\ decide()
-comment3.params=
-comment3.target=int\ vecinosMuertos()
-numComments=4
+numComments=3

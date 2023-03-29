@@ -13,7 +13,6 @@ public class Sensible extends Cell
     public Sensible(CellularAutomata ac,int row, int column){
         super(ac,row,column);
         color = Color.blue;
-        ac.getVecinos(row,column);
     }
     
     
@@ -22,33 +21,26 @@ public class Sensible extends Cell
         int row = getRow();
         int column = getColumn();
         if(isAlive()){
-            if(vecinosMuertos() > 0){
+            if(contarVecinosMuertos() > 0){
                 nextState=Agent.DEAD;
             }
             if(getAge()>=50){
                 nextState=Agent.DEAD;
             }
-            if(au.getVecinos(row,column)[4].isAlive()&& 
-            (au.getItem(row + 1, column) instanceof Sociable) 
-            && ((getAge() + 1)%5 == 0) &&
+            if(au.getVecinos(row,column)[2] != null
+            &&
+            (au.getVecinos(row,column)[2] instanceof Sociable) 
+ 
+            && 
+            au.getVecinos(row,column)[2].isAlive()
+            && 
+            ((getAge() + 1)%5 == 0) 
+            &&
             au.getItem(row + 1,column + 1) == null){
                 au.someItems(row + 1, column + 1);
             }
         }
     }
     
-    public int vecinosMuertos(){
-        CellularAutomata au=this.getAutomata();
-        int vecinosMuertos = 0;
-        for(int i = 0; i < 8;i++){
-            try{
-                if(!au.getVecinos(getRow(), getColumn())[i].isAlive() && au.getVecinos(getRow(), getColumn())[i] instanceof Cell) vecinosMuertos++;
-            }catch(NullPointerException e){
-                vecinosMuertos = vecinosMuertos;
-            }
-        }
-        return vecinosMuertos;
-    }
-    
-    
+
 }

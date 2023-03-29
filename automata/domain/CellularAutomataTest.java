@@ -56,6 +56,15 @@ public class CellularAutomataTest
        assertFalse(noreste.isAlive());
    }
    
+   @Test 
+   public void shouldSensibleDo(){
+       CellularAutomata auto = new CellularAutomata();
+       Sensible Camilo = new Sensible(auto,1,2);
+       Sensible Juan = new Sensible(auto,1,3);
+       Sensible Profesor = new Sensible(auto,4,6);
+       Sensible Profesora = new Sensible(auto,5,6);
+   }
+   
    public void doTicTac(CellularAutomata au,int times){
        for(int i =0;i<times;i++){
            au.ticTac();
