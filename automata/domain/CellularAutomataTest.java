@@ -56,18 +56,37 @@ public class CellularAutomataTest
        assertFalse(noreste.isAlive());
    }
    
-   @Test 
-   public void shouldSensibleDo(){
-       CellularAutomata auto = new CellularAutomata();
-       Sensible Camilo = new Sensible(auto,1,2);
-       Sensible Juan = new Sensible(auto,1,3);
-       Sensible Profesor = new Sensible(auto,4,6);
-       Sensible Profesora = new Sensible(auto,5,6);
-   }
+   
    
    public void doTicTac(CellularAutomata au,int times){
        for(int i =0;i<times;i++){
            au.ticTac();
        }
+   }
+   
+   @Test
+   public void SensibleShouldCreate(){
+       CellularAutomata auto = new CellularAutomata();
+       Sensible Camilo = new Sensible(auto,1,2);
+       Sociable profesor = new Sociable(auto,2,2);
+       Sensible Juan = new Sensible(auto,0,0);
+       Sociable profesora = new Sociable(auto,1,0);
+       for(int i = 0; i < 5; i++){
+           auto.ticTac();
+       }
+       assertTrue(auto.getItem(2,3) != null && auto.getItem(2,3) instanceof Cell && !(auto.getItem(2,3) instanceof Sociable || auto.getItem(2,3) instanceof Sensible));
+       assertTrue(auto.getItem(1,1) != null && auto.getItem(1,1) instanceof Cell && !(auto.getItem(1,1) instanceof Sociable || auto.getItem(1,1) instanceof Sensible));
+   }
+   @Test
+   public void BulbShouldLive(){
+       CellularAutomata auto = new CellularAutomata();
+       LightBulb Maria = new LightBulb(auto,0,0);
+       auto.ticTac();
+       assertTrue(Maria.isAlive());
+       assertEquals(Maria.getColor(), Color.yellow);
+       LightBulb Jose = new LightBulb(auto,5,5);
+       Cell Luis = new Cell(auto,5,6);
+       assertFalse(Jose.isAlive());
+       assertEquals(Jose.getColor(), Color.cyan);
    }
 }

@@ -67,6 +67,7 @@ public class CellularAutomata{
             }
         }
         
+        
         for (int r=0;r<LENGTH;r++){
             for (int c=0;c<LENGTH;c++){
                 if(automataCopy[r][c] != null){
@@ -75,15 +76,15 @@ public class CellularAutomata{
                 }
             }
         }
-    
         for (int r=0;r<LENGTH;r++){
             for (int c=0;c<LENGTH;c++){
                 if(automataCopy[r][c] != null){
-                    System.out.println(r+","+c);
+                    //System.out.println(r+","+c);
                     automataCopy[r][c].decide();
                 }
             }
         }
+        
         this.newAutomataCopy();
     }
     public Item[][] automataCopy(){

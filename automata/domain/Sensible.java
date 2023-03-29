@@ -34,7 +34,7 @@ public class Sensible extends Cell
             && 
             au.getVecinos(row,column)[2].isAlive()
             && 
-            ((getAge() + 1)%5 == 0) 
+            ((getAge())%5 == 0) 
             &&
             au.getItem(row + 1,column + 1) == null){
                 au.someItems(row + 1, column + 1);
