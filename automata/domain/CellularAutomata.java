@@ -60,32 +60,37 @@ public class CellularAutomata{
     
     public void ticTac(){
         Item[][] automataCopy = new Item[LENGTH][LENGTH];
-        this.newAutomataCopy();
+
         for (int r=0;r<LENGTH;r++){
             for (int c=0;c<LENGTH;c++){
                 automataCopy[r][c]=this.getItem(r,c);
             }
         }
         
+        this.newAutomataCopy();
+        for (int r=0;r<LENGTH;r++){
+            for (int c=0;c<LENGTH;c++){
+                if(automataCopy[r][c] != null){
+                    System.out.println(r+","+c);
+                    automataCopy[r][c].decide();
+                }else{
+                    Conway newCell = new Conway(this,r,c);
+                    if(newCell.contarTodosVecinos()<3){
+                        newCell.deleteItem();
+                    }
+                }
+            }
+        }
         
         for (int r=0;r<LENGTH;r++){
             for (int c=0;c<LENGTH;c++){
                 if(automataCopy[r][c] != null){
-                    
                     automataCopy[r][c].change();
                 }
             }
         }
-        for (int r=0;r<LENGTH;r++){
-            for (int c=0;c<LENGTH;c++){
-                if(automataCopy[r][c] != null){
-                    //System.out.println(r+","+c);
-                    automataCopy[r][c].decide();
-                }
-            }
-        }
-        
         this.newAutomataCopy();
+        
     }
     public Item[][] automataCopy(){
         Item[][] automataCopy = new Item[LENGTH][LENGTH];

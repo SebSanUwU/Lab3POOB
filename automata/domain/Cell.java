@@ -94,7 +94,7 @@ public class Cell extends Agent implements Item{
         //System.out.println(cont);
         //oeste
         if(automata.getItemCopy((row+lenght)%lenght,(column+lenght-1)%lenght)!=null && automata.getItemCopy((row+lenght)%lenght,(column+lenght-1)%lenght).isAlive() && automata.getItemCopy((row+lenght)%lenght,(column+lenght-1)%lenght) instanceof Cell) cont++;
-        System.out.println(cont+"bruh");
+        //System.out.println(cont+"bruh");
         return cont;
     }
     
@@ -121,13 +121,13 @@ public class Cell extends Agent implements Item{
         int lenght = automata.getLength();
         for(int i = -1; i<2; i++){
             for(int j = -1; j<2; j++){
-               if(automata.getItemCopy((row+lenght+i)%lenght,(column+lenght+j)%lenght)!=null && automata.getItemCopy((row+lenght+i)%lenght,(column+lenght+j)%lenght).isAlive() && automata.getItemCopy((row+lenght+i)%lenght,(column+lenght+j)%lenght) instanceof Cell) cont++;
+               if((i!=0 || j!=0) && automata.getItemCopy((row+lenght+i)%lenght,(column+lenght+j)%lenght)!=null && automata.getItemCopy((row+lenght+i)%lenght,(column+lenght+j)%lenght).isAlive() && automata.getItemCopy((row+lenght+i)%lenght,(column+lenght+j)%lenght) instanceof Cell){
+                 System.out.println(i+"en"+j);
+                   cont++;  
+               }
             }
         }
-        if(automata.getItemCopy(row,column) != null){
-            cont--;
-        }
-        System.out.println(cont);
+        //System.out.println(cont);
         return cont;
     }
     

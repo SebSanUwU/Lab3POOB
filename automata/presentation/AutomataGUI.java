@@ -55,12 +55,20 @@ public class AutomataGUI extends JFrame{
     
     public static void main(String[] args) {
         AutomataGUI ca=new AutomataGUI();
+        ca.automata.someItemsConway(21,7);
+        ca.automata.someItemsConway(21,8);
+        ca.automata.someItemsConway(21,9);
+        
+        ca.automata.someItemsConway(26,1);
+        ca.automata.someItemsConway(26,2);
+        ca.automata.someItemsConway(27,1);
+        ca.automata.someItemsConway(27,2);
+        
+        ca.automata.someItemsConway(4,10);
+        ca.automata.someItemsConway(4,11);
         
         ca.automata.someItemsSocial(1,2);
-        
         ca.automata.someItemsSocial(2,2);
-        
-        
         ca.setVisible(true);
     }  
 }

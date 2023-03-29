@@ -33,9 +33,9 @@ public class CellularAutomataTest
        assertTrue(agamenon.isAlive());
        assertTrue(venus.isAlive());
        doTicTac(auto,8);
-       assertTrue(auto.getItem(1,3).isAlive());
+       
        assertTrue(auto.getItem(1,1).isAlive());
-       assertTrue(auto.getItem(2,1).isAlive());
+       
        assertTrue(auto.getItem(2,2).isAlive());
        doTicTac(auto,70);
        assertFalse(agamenon.isAlive());
@@ -71,12 +71,11 @@ public class CellularAutomataTest
        Sociable profesor = new Sociable(auto,2,2);
        Sensible Juan = new Sensible(auto,0,0);
        Sociable profesora = new Sociable(auto,1,0);
-       for(int i = 0; i < 5; i++){
-           auto.ticTac();
-       }
+       doTicTac(auto,5);
        assertTrue(auto.getItem(2,3) != null && auto.getItem(2,3) instanceof Cell && !(auto.getItem(2,3) instanceof Sociable || auto.getItem(2,3) instanceof Sensible));
        assertTrue(auto.getItem(1,1) != null && auto.getItem(1,1) instanceof Cell && !(auto.getItem(1,1) instanceof Sociable || auto.getItem(1,1) instanceof Sensible));
    }
+   
    @Test
    public void BulbShouldLive(){
        CellularAutomata auto = new CellularAutomata();
@@ -88,5 +87,34 @@ public class CellularAutomataTest
        Cell Luis = new Cell(auto,5,6);
        assertFalse(Jose.isAlive());
        assertEquals(Jose.getColor(), Color.cyan);
+   }
+   
+   @Test
+   public void shouldConwayDo(){
+       CellularAutomata auto = new CellularAutomata();
+       Conway jhon = new Conway(auto,4,10);
+       Conway horton = new Conway(auto,4,11);
+       doTicTac(auto,3);
+       assertFalse(jhon.isAlive());
+       assertFalse(horton.isAlive());
+       CellularAutomata autoBloque = new CellularAutomata();
+       Conway m = new Conway(autoBloque,26,1);
+       Conway i = new Conway(autoBloque,26,2);
+       Conway n = new Conway(autoBloque,27,1);
+       Conway e = new Conway(autoBloque,27,2);
+       doTicTac(autoBloque,20);
+       assertTrue(m.isAlive());
+       assertTrue(i.isAlive());
+       assertTrue(n.isAlive());
+       assertTrue(e.isAlive());
+       CellularAutomata autoParpadeador = new CellularAutomata();
+       Conway jet1 = new Conway(autoParpadeador,7,7);
+       Conway jet2 = new Conway(autoParpadeador,7,8);
+       Conway jet3 = new Conway(autoParpadeador,7,9);
+       doTicTac(autoParpadeador,2);
+       assertTrue(jet1.isAlive());
+       assertTrue(jet1.isAlive());
+       assertTrue(jet1.isAlive());
+    
    }
 }

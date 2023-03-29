@@ -16,7 +16,7 @@ public class Sociable extends Cell
     public void decide(){
         CellularAutomata au=this.getAutomata();
         if(isAlive()){
-            contarTodosVecinos();
+            //contarTodosVecinos();
             //System.out.println("Decidiendo");
             if(contarVecinos() >= 2){
                 //System.out.println("muerte vecinos");
@@ -27,13 +27,13 @@ public class Sociable extends Cell
                 nextState=Agent.DEAD;
             }
             if(getColumn()+1<au.getLength()  
-            && getAge()%10==0 
+            && getAge()%9==0 
             && au.getItemCopy((getRow()+au.getLength())%au.getLength(),(getColumn()+au.getLength()+1)%au.getLength())==null){
                 System.out.println("celula normal");
                 au.someItems(getRow(),getColumn()+1);
             }
             if(getColumn()-1>=0 
-            && getAge()%10==0 
+            && getAge()%9==0 
             && au.getItemCopy((getRow()+au.getLength())%au.getLength(),(getColumn()+au.getLength()-1)%au.getLength())==null){
                 au.someItemsSocial(getRow(),getColumn()-1);
             }
